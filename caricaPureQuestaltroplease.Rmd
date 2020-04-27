@@ -1,0 +1,238 @@
+---
+title: "TP6TND"
+author: "Alessandro Rinaudo"
+date: "3/3/2020"
+output: html_document
+---
+# Fichier Text
+```{r csvText}
+data("iris")
+write.table(iris,file="iris_data.txt")
+my_data= read.table("iris_data.txt")
+my_data
+```
+
+# Fichier csv
+```{r csvXsv}
+write.csv (iris,file = "iris_data.csv")
+my_data=read.csv("iris_data.csv")
+
+my_data
+
+write.csv2(iris,file="iris_data.csv")
+my_data2=read.csv2("iris_data.csv")
+my_data
+```
+
+# Fichier Excel
+```{r Excel}
+library(openxlsx)
+data("iris")
+openxlsx::write.xlsx(iris,file="writeXLSX2.xlsx")
+df= openxlsx::read.xlsx("writeXLSX2.xlsx")
+
+head(df)
+```
+
+
+# Fichier JSON
+```{r Json}
+library(rjson)
+my_data3= fromJSON(file="places.json")
+print(my_data3)
+
+```
+
+# Fichier rio
+```{r Rio}
+library(rio)
+fname = system.file("voc_voyages.tsv",package = "efficient")
+#importer le fichier 
+voyages = import("voc_voyages.tsv")
+
+#exporter le fichier en format excel
+export(voyages,"voc_voyages.xlsx")
+
+```
+
+# Fichier XML
+```{r  XML}
+
+library(XML)
+#télécharger le fichier XML à l'adresse http://up5.fr/2Ox4g
+result= xmlParse(file="exemple_xml.xml")
+
+#calculer le nb d'elements
+rootnode=xmlRoot(result)
+nbr_elements= xmlSize(rootnode)
+print(nbr_elements)
+
+#mettre sous format dataframe
+xmldataframe=xmlToDataFrame("exemple_xml.xml")
+xmldataframe
+```
+
+
+# Fichier fread et read
+```{r  Fread}
+#read
+voyages_base=read.delim("voc_voyages.tsv")
+class(voyages_base$built)
+
+#fread
+voyages_base=data.table::fread("voc_voyages.tsv")
+class(voyages_base$built)
+```
+
+# Lecture à partir d'internet
+```{r  Internet}
+
+#téléchargement d'un fichier
+url="https://vincentarelbundock.github.com/Rdatasets/datasets.csv"
+download.file(url,"datasets.csv")
+df_co2=read.csv("datasets.csv")
+df_co2[1:5,1:3]
+
+#lecture d'un fichier zip
+url="https://github.com/vincentarelbundock/Rdatasets/zipball/master/vincentarelbundock-Rdatasets-e523e67.zip"
+download.file(url,"vincentarelbundock-Rdatasets-e523e67.zip")
+unzip("vincentarelbundock-Rdatasets-e523e67.zip",exdir="data")
+
+#supprimer le fichier téléchargé
+file.remove("vincentarelbundock-Rdatasets-e523e67.zip")
+```
+
+# Le Type rds
+```{r  rds}
+#exemple d'utisation 
+cars_=cars[1:5,]
+saveRDS(cars,file="cars.rds")
+readRDS(file="cars.rds")
+
+print("l'import s'est effectué avec succés !")
+```
+
+# Le Type Rdata et rda
+```{r  RData}
+save(cars,iris,file="cars_iris.RData")
+load(file="cars_iris.RData")
+print("L'import s'est effectué avec succès")
+```
+
+# Datasets disponibles sous R
+```{r  DatasetR}
+#pour acceder à la liste de jeux de données disponibles sous R
+data()
+
+#Afin de charger un jeu de données en particulier
+data("iris")
+
+#Pour acceder à la liste des jeux de données disponibles sous R
+
+list.files(system.file("extdata",package="readr"))
+```
+
+# EXERCICE 1
+```{r  Exo 1}
+fname = system.file("voc_invoices.tsv",package = "efficient")
+invoices = import("voc_invoices.tsv")
+
+#format 1 (format excel)
+export(invoices,"voc_invoices.xlsx")
+
+#format 2 (format txt)
+export(invoices,"voc_invoices.txt")
+
+#format 3 (format csv)
+export(invoices,"voc_invoices.csv")
+
+#on compare le temps 
+system.time(export(invoices,"voc_invoices.xlsx"))
+system.time(export(invoices,"voc_invoices.txt"))
+system.time(export(invoices,"voc_invoices.csv"))
+## on constat que la methode la plus lente est celle du fichier excel
+
+```
+
+
+# EXERCICE 2
+```{r exo2}
+
+data = read.csv("nndb_flat.csv")
+
+#Le tableau de données est composé de 8,618 elements et 45 colonnes por chaque element. Ce tableau contient des aliments et pour chaque aliment il affiche l'ID, le groupe alimentaire, la descrption, le nom commun, le nom de l'entreprise, le nom scientifique, l'energie en kcal, tous ses macro et micronutriments.
+
+ 
+
+#Fonction qui retourne les indices des colonnes de types numériques
+
+
+recuperation_indices_num <- function(data){
+
+  list_indice = c()
+
+  for(i in 1:dim(data)[2]){
+
+    type = class(data[,i])
+
+    if(type %in% c("numeric","integer")){
+
+      list_indice = c(list_indice,i)
+
+    }
+
+  }
+
+  return(list_indice)
+
+}
+
+recuperation_indices_num(data)
+
+#Reduction de la dimension à l'aide de l'ACP
+
+library(FactoMineR)
+
+data(decathlon)
+
+data1 = data[,recuperation_indices_num(data)]
+
+res.acp = PCA(data1[,2:39])
+
+```
+
+
+# EXERCICE 3
+```{r  Exo 3}
+library (rjson)
+data=fromJSON(file="Signal.json")
+n=length(data$features)
+for(i in 1:n)
+{
+    listevariable=c()
+    listevalue=c()
+    block=data[[i]]
+    m = length(block)
+    listeKey=names(block)
+    for(j in 1:m)
+    {
+        ss_block = block[[j]] #ss_block = sousblock
+        l=length(ss_block)
+        liste_ssKey=names(ss_block)
+        if(l<2)
+        {
+            listevariable=c(listevariable,liste_ssKey[[j]])
+            listevalue=c(listevalue,ss_block)
+        }
+        for(b in 1:l)
+        {
+            ss_ss_block=ss_block[[b]]
+            a=length(ss_ss_block)
+            listevariable =c(listevariable,liste_ssKey[[b]])
+            listevalue=c(listevariable,ss_ss_block)
+        }
+        
+    }
+}
+
+```
