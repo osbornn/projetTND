@@ -107,7 +107,6 @@ cor(covid.19[,-1])
 #### Affichage matrice de corrélation
 ```{r partie2.1.1.2}
 #install.packages("corrplot")
-head(covid.19[,-1])
 M<-cor(covid.19[,-1])
 library(corrplot)
 corrplot(M, method="circle")
