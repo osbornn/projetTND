@@ -1,12 +1,37 @@
 ---
 title: "Projet TND"
-author: "Alessandro Rinaudo"
-date: "4/27/2020"
+author: "Alessandro Rinaudo et Alberto Petrossi"
+date: "4/21/2020"
 output: html_document
 ---
 
-```{r Partie1.1}
-getwd()
-my_data=read.csv("donnees_covid.csv", sep = ";")
+# Partie 1 : Analyse descriptive
+
+## Question 1 
+#### (Téléchargement du jeu de données et chargement sur R)
+```{r partie1.1}
+covid.19=read.csv("donnees_covid.csv", sep = ";")
+```
+
+## Question 2
+
+#### dimension
+```{r partie1.2.1}
+dim(covid.19)
+```
+
+#### nom variables
+```{r partie1.2.2}
+names(covid.19)
+```
+
+#### type variable 
+```{r partie1.2.3}
+typeof(covid.19)
+```
+
+#### statistiques générales 
+```{r partie1.2.4}
+summary(covid.19)
 ```
 
