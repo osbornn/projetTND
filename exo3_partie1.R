@@ -2,22 +2,21 @@
 
 #Loading stuff
 library(leaflet)
-covid19 <- head(covid.19, 100)
 
 #Colors and shit
-mybins <- seq(4, 6.5, by=0.5)
-mypalette <- colorBin( palette="YlOrBr", domain=covid19$deces_total, na.color="transparent", bins=mybins)
+mybins = seq(4, 6.5, by=0.5)
+mypalette = colorBin( palette="YlOrBr", domain=covid.19$deces_total, na.color="transparent", bins=mybins)
 
 # Prepare the text for the tooltip:
-mytext <- paste(
-  "DÈcËs totaux: ", covid19$deces_total, "<br/>", 
-  "RÈanimations totales : ", covid19$reanimation_total, "<br/>", 
-  "HospitalisÈs totaux : ", covid19$hospitalises_total, "<br/>",
-  "GuÈris totaux : ", covid19$gueris_total, sep = "") %>%
+mytext = paste(
+  "D√©c√©s totaux: ", covid.19$deces_total, "<br/>", 
+  "R√©animations totales : ", covid.19$reanimation_total, "<br/>", 
+  "Hospitalis√©s totaux : ", covid.19$hospitalises_total, "<br/>",
+  "Gu√©ris totaux : ", covid.19$gueris_total, sep = "") %>%
   lapply(htmltools::HTML)
 
 #Map
-m <- leaflet(covid19) %>% 
+m = leaflet(covid.19) %>% 
   addTiles()  %>% 
   setView( lat=-27, lng=170 , zoom=4) %>%
   addProviderTiles("Esri.WorldImagery") %>%
@@ -26,7 +25,7 @@ m <- leaflet(covid19) %>%
                    label = mytext,
                    labelOptions = labelOptions( style = list("font-weight" = "normal", padding = "3px 8px"), textsize = "13px", direction = "auto")
   ) %>%
-  addLegend( pal=mypalette, values=~deces_total, opacity=0.9, title = "Magnitude", position = "bottomright" )
+  addLegend( pal=mypalette, values=~deces_total, opacity=0.9, title = "nb de morts", position = "bottomright" )
 
 m 
 
