@@ -8,30 +8,58 @@ output: html_document
 # Partie 1 : Analyse descriptive
 
 ## Question 1 
-#### (Téléchargement du jeu de données et chargement sur R)
+#### Téléchargement du jeu de données et chargement sur R
 ```{r partie1.1}
 covid.19=read.csv("donnees_covid.csv", sep = ";")
 ```
 
 ## Question 2
 
-#### dimension
+#### Description du jeu de données 
+```{r partie1.description}
+# Dataframe contenant les donnéés avec 8 variables 
+#maille_nom : nom des provinces françaises
+#
+```
+#### Dimension
 ```{r partie1.2.1}
 dim(covid.19)
 ```
 
-#### nom variables
+#### Nom variables
 ```{r partie1.2.2}
 names(covid.19)
 ```
 
-#### type variable 
+#### Type variable 
 ```{r partie1.2.3}
 typeof(covid.19)
 ```
 
-#### statistiques générales 
+#### Statistiques générales 
 ```{r partie1.2.4}
 summary(covid.19)
 ```
+
+#### Calcul de l'écart type 
+```{r partie1.2.5}
+apply (covid.19[,-1],2,sd)
+```
+
+#### Réalisation boite à moustache
+```{r partie1.2.6}
+boxplot(covid.19[,-1])
+```
+
+#### Réalisation histogrammes
+```{r partie1.2.7}
+hist(covid.19$duree_jours)
+hist(covid.19$latitude)
+hist(covid.19$longitude)
+hist(covid.19$deces_total)
+hist(covid.19$reanimation_total)
+hist(covid.19$hospitalises_total)
+hist(covid.19$gueris_total)
+```
+
 
