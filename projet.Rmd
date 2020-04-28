@@ -101,15 +101,20 @@ m
 
 #### Calcul de la corrélation entre les variables "reanimation_total" , "hospitalisation_total" , "gueris_total"
 ```{r partie2.1.1}
-cor(covid.19[,-1])
+cor(covid.19[,-c(1:5)])
 ```
 
 #### Affichage matrice de corrélation
 ```{r partie2.1.1.2}
 #install.packages("corrplot")
-M<-cor(covid.19[,-1])
+M<-cor(covid.19[,-c(1:5)])
 library(corrplot)
 corrplot(M, method="circle")
+```
+
+#### Affichage nouages de points
+```{r partie2.2}
+plot(covid.19[,-c(1:4)])
 ```
 
 
