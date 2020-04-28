@@ -22,7 +22,7 @@ covid.19=read.csv("donnees_covid.csv", sep = ";")
 #maille_nom : nom des provinces françaises
 #
 ```
-#### Dimension
+#### Calcul de la dimension
 ```{r partie1.2.1}
 dim(covid.19)
 ```
@@ -66,5 +66,19 @@ hist(covid.19$gueris_total)
 #### Affichage de la carte géographique 
 ```{r partie1.3.1}
 
+```
+
+# Partie 2 : Prédiction du nombre de décès
+
+## Question 1 
+
+#### Calcul de la corrélation entre les variables "reanimation_total" , "hospitalisation_total" , "gueris_total"
+```{r partie2.1.1}
+cor(covid.19[,-1])
+```
+
+#### Affichage matrice de corrélation
+```{r partie2.1.1.2}
+cor(covid.19[,-1])
 ```
 

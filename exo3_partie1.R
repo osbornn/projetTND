@@ -4,8 +4,8 @@
 library(leaflet)
 
 #Colors and shit
-mybins <- seq(max(covid.19$deces_total), min(covid.19$deces_total), by=-2000)
-mypalette <- colorBin( palette = "RdYlGn", domain=covid.19$deces_total, na.color="transparent", bins=mybins)
+mybins = seq(max(covid.19$deces_total), min(covid.19$deces_total), by=-2000)
+mypalette = colorBin( palette = "RdYlGn", domain=covid.19$deces_total, na.color="transparent", bins=mybins)
 
 # Prepare the text for the tooltip:
 mytext <- paste(
@@ -16,7 +16,7 @@ mytext <- paste(
   lapply(htmltools::HTML)
 
 #Map
-m <- leaflet(covid.19) %>% 
+m = leaflet(covid.19) %>% 
   addTiles()  %>% 
   setView( lat=-27, lng=170 , zoom=4) %>%
   addProviderTiles("Esri.WorldImagery") %>%
