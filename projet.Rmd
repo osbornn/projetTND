@@ -63,24 +63,31 @@ hist(covid.19$hospitalises_total)
 hist(covid.19$gueris_total)
 ```
 
+## Question 3
+
 #### Affichage de la carte géographique 
 ```{r partie1.3.1}
 #Loading stuff
 library(leaflet)
+```
 
-#Colors and shit ciro
+#### Colors and shit ciro
+```{r partie1.3.1.2}
 mybins = seq(min(covid.19$deces_total), max(covid.19$deces_total), by=2000)
 mypalette = colorBin( palette = "YlOrRd", domain=covid.19$deces_total, na.color="transparent", bins=mybins)
-
-# Prepare the text for the tooltip:
+```
+#### Prepare the text for the tooltip:
+```{r partie1.3.1.3}
 mytext <- paste(
   "Deces totaux: ", covid.19$deces_total, "<br/>", 
   "Reanimations totales : ", covid.19$reanimation_total, "<br/>", 
   "Hospitalises totaux : ", covid.19$hospitalises_total, "<br/>",
   "Gueris totaux : ", covid.19$gueris_total, sep = "") %>%
   lapply(htmltools::HTML)
+```
 
-#Map
+#### Map
+```{r partie1.3.1.4}
 m = leaflet(covid.19) %>% 
   addTiles()  %>% 
   setView( lat=48, lng=2 , zoom=5) %>%
@@ -114,7 +121,11 @@ corrplot(M, method="circle")
 
 #### Affichage nouages de points
 ```{r partie2.2}
-plot(covid.19[,-c(1:4)])
+help("plot")
+plot(covid.19[c(5:6)])
+plot(covid.19$deces_total,covid.19$hospitalises_total)
+plot(covid.19$deces_total,covid.19$gueris_total)
+
 ```
 
 
