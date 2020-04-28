@@ -71,7 +71,7 @@ hist(covid.19$gueris_total)
 library(leaflet)
 ```
 
-#### Colors and shit ciro
+#### Colors
 ```{r partie1.3.1.2}
 mybins = seq(min(covid.19$deces_total), max(covid.19$deces_total), by=2000)
 mypalette = colorBin( palette = "YlOrRd", domain=covid.19$deces_total, na.color="transparent", bins=mybins)
@@ -125,6 +125,8 @@ help("plot")
 plot(covid.19[c(5:6)])
 plot(covid.19$deces_total,covid.19$hospitalises_total)
 plot(covid.19$deces_total,covid.19$gueris_total)
+
+#Les variables qui permettent d'expliquer au mieux la variable à prédire sont les variables hospitalises_total et reanimation_total, car elles permettent de se faire une idée sur le nombre potentiel de personnes décédées. 
 
 ```
 
