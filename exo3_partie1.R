@@ -9,10 +9,10 @@ mypalette <- colorBin( palette = "RdYlGn", domain=covid.19$deces_total, na.color
 
 # Prepare the text for the tooltip:
 mytext <- paste(
-  "Décès totaux: ", covid.19$deces_total, "<br/>", 
-  "Réanimations totales : ", covid.19$reanimation_total, "<br/>", 
-  "Hospitalisés totaux : ", covid.19$hospitalises_total, "<br/>",
-  "Guéris totaux : ", covid.19$gueris_total, sep = "") %>%
+  "Dï¿½cï¿½s totaux: ", covid.19$deces_total, "<br/>", 
+  "Rï¿½animations totales : ", covid.19$reanimation_total, "<br/>", 
+  "Hospitalisï¿½s totaux : ", covid.19$hospitalises_total, "<br/>",
+  "Guï¿½ris totaux : ", covid.19$gueris_total, sep = "") %>%
   lapply(htmltools::HTML)
 
 #Map
