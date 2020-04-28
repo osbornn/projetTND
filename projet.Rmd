@@ -1,7 +1,8 @@
 ---
 title: "Projet TND"
-author: "Alessandro Rinaudo et Alberto Petrossi"
+authors: "Alessandro Rinaudo(21701590) et Alberto Petrossi(21701689)"
 date: "4/21/2020"
+info : "Ce projet a été réalisé en binôme"
 output: html_document
 ---
 
@@ -62,4 +63,8 @@ hist(covid.19$hospitalises_total)
 hist(covid.19$gueris_total)
 ```
 
+#### Affichage de la carte géographique 
+```{r partie1.3.1}
+
+```
 
