@@ -4,8 +4,8 @@
 library(leaflet)
 
 #Colors and shit
-mybins = seq(max(covid.19$deces_total), min(covid.19$deces_total), by=-2000)
-mypalette = colorBin( palette = "RdYlGn", domain=covid.19$deces_total, na.color="transparent", bins=mybins)
+mybins = seq(min(covid.19$deces_total), max(covid.19$deces_total), by=2000)
+mypalette = colorBin( palette = "YlOrRd", domain=covid.19$deces_total, na.color="transparent", bins=mybins)
 
 # Prepare the text for the tooltip:
 mytext <- paste(
@@ -18,7 +18,7 @@ mytext <- paste(
 #Map
 m = leaflet(covid.19) %>% 
   addTiles()  %>% 
-  setView( lat=-27, lng=170 , zoom=4) %>%
+  setView( lat=48, lng=2 , zoom=5) %>%
   addProviderTiles("Esri.WorldImagery") %>%
   addCircleMarkers(~longitude, ~latitude, 
                   fillColor = ~mypalette(covid.19$deces_total), fillOpacity = 0.7, color="white", radius=8, stroke=FALSE,
