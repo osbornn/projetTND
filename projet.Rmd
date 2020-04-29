@@ -147,4 +147,12 @@ sous.jeu.2
 ```
 
 
+## Question 4
+
+#### Régression linéaire entre les variables explicatives et la variable à expliquer
+```{r partie2.4}
+
+
+```
+
 
