@@ -71,14 +71,15 @@ hist(covid.19$gueris_total)
 library(leaflet)
 ```
 
-#### Colors
+#### Couleurs
 ```{r partie1.3.1.2}
 mybins = seq(min(covid.19$deces_total), max(covid.19$deces_total), by=2000)
 mypalette = colorBin( palette = "YlOrRd", domain=covid.19$deces_total, na.color="transparent", bins=mybins)
 ```
-#### Prepare the text for the tooltip:
+
+#### Preparation du texte pour la info-bulle:
 ```{r partie1.3.1.3}
-mytext <- paste(
+mytext = paste(
   "Deces totaux: ", covid.19$deces_total, "<br/>", 
   "Reanimations totales : ", covid.19$reanimation_total, "<br/>", 
   "Hospitalises totaux : ", covid.19$hospitalises_total, "<br/>",
@@ -86,7 +87,7 @@ mytext <- paste(
   lapply(htmltools::HTML)
 ```
 
-#### Map
+#### Création de la carte
 ```{r partie1.3.1.4}
 m = leaflet(covid.19) %>% 
   addTiles()  %>% 
@@ -102,6 +103,7 @@ m = leaflet(covid.19) %>%
 m 
 ```
 
+
 # Partie 2 : Prédiction du nombre de décès
 
 ## Question 1 
@@ -114,10 +116,12 @@ cor(covid.19[,-c(1:5)])
 #### Affichage matrice de corrélation
 ```{r partie2.1.1.2}
 #install.packages("corrplot")
-M<-cor(covid.19[,-c(1:5)])
+M=cor(covid.19[,-c(1:5)])
 library(corrplot)
 corrplot(M, method="circle")
 ```
+
+## Question 2
 
 #### Affichage nouages de points
 ```{r partie2.2}
@@ -125,9 +129,16 @@ help("plot")
 plot(covid.19[c(5:6)])
 plot(covid.19$deces_total,covid.19$hospitalises_total)
 plot(covid.19$deces_total,covid.19$gueris_total)
-
-#Les variables qui permettent d'expliquer au mieux la variable à prédire sont les variables hospitalises_total et reanimation_total, car elles permettent de se faire une idée sur le nombre potentiel de personnes décédées. 
-
 ```
 
+#### Les variables qui permettent d'expliquer au mieux la variable à prédire sont les variables "hospitalises_total" et "reanimation_total", car elles permettent de se faire une idée sur le nombre potentiel de personnes décédées. 
+
+## Question 3
+
+#### Division du jeu de données en deux sous-ensemble (80%-20%)
+```{r partie2.3}
+#pt1 = pt1.int(n = nrow(covid.19), size = floor(.80*nrow(covid.19)))
+#sous-jeu-1 = covid.19[pt1, ]
+#sous-jeu-2  = covid.19[-pt1, ]
+```
 
