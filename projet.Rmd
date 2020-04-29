@@ -137,8 +137,14 @@ plot(covid.19$deces_total,covid.19$gueris_total)
 
 #### Division du jeu de données en deux sous-ensemble (80%-20%)
 ```{r partie2.3}
-#pt1 = pt1.int(n = nrow(covid.19), size = floor(.80*nrow(covid.19)))
-#sous-jeu-1 = covid.19[pt1, ]
-#sous-jeu-2  = covid.19[-pt1, ]
+sample = sample.int(n = nrow(covid.19), size = floor(.80*nrow(covid.19)))
+sous.jeu.1 = covid.19[sample, ]
+sous.jeu.2  = covid.19[-sample, ]
+
+sous.jeu.1
+sous.jeu.2
+
 ```
+
+
 
