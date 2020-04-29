@@ -138,11 +138,11 @@ plot(covid.19$deces_total,covid.19$gueris_total)
 #### Division du jeu de données en deux sous-ensemble (80%-20%)
 ```{r partie2.3}
 sample = sample.int(n = nrow(covid.19), size = floor(.80*nrow(covid.19)))
-sous.jeu.1 = covid.19[sample, ]
-sous.jeu.2  = covid.19[-sample, ]
+apprentissage = covid.19[sample, ]
+test  = covid.19[-sample, ]
 
-sous.jeu.1
-sous.jeu.2
+apprentissage
+test
 
 ```
 
@@ -151,6 +151,10 @@ sous.jeu.2
 
 #### Régression linéaire entre les variables explicatives et la variable à expliquer
 ```{r partie2.4}
+regRea = lm(apprentissage$deces_total~apprentissage$reanimation_total, data = covid.19)
+regHos = lm(apprentissage$deces_total~apprentissage$hospitalises_total, data = covid.19)
+regGue = lm(apprentissage$deces_total~apprentissage$gueris_total, data = covid.19)
+
 
 
 ```
