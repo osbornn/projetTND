@@ -153,6 +153,14 @@ test
 ```{r partie2.4}
 regLi = lm(deces_total~reanimation_total + hospitalises_total + gueris_total, data = apprentissage)
 plot(regLi)
+
+#Sur le premier graphique, on observe que les résidus sont dispersés de manière égale autour de la droite horizontale sans suivre une forme de fonction distincte. Donc le mode de régression est bon et il a une bonne capacité de généralisation. 
+
+#Sur le deuxième graphique (Q-Q plot), on observe qu'il suit une ligne droite. On en déduit que le modèle est bon.
+
+#Sur le troisième graphique (Scale-Location), on constate que les résidus se dispersent après la valeur prédite 0. Par conséquent le modèle n'a pas une bonne généralisation. 
+
+
 ```
 
 ## Question 6
