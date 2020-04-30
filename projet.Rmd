@@ -151,12 +151,39 @@ test
 
 #### Régression linéaire entre les variables explicatives et la variable à expliquer
 ```{r partie2.4}
-regRea = lm(apprentissage$deces_total~apprentissage$reanimation_total, data = covid.19)
-regHos = lm(apprentissage$deces_total~apprentissage$hospitalises_total, data = covid.19)
-regGue = lm(apprentissage$deces_total~apprentissage$gueris_total, data = covid.19)
+regLi = lm(deces_total~reanimation_total + hospitalises_total + gueris_total, data = apprentissage)
+plot(regLi)
 
 
 
 ```
+## Question 6
+
+#### Calcul du MAE (Min Absolute Error) et MSE (Min Squared Error)
+```{r partie2.6}
+MAE = function(y_reel, y_est)
+{
+val = abs(y_reel-y_est)
+mae_cal = mean(val)
+return(mae_cal)
+}
+
+MSE = function(y_reel, y_est)
+{
+val = (y_reel-y_est)^2
+mse_cal = mean(val)
+return(mse_cal)
+}
+
+y_estime = predict(regLi)
+
+MAE(apprentissage$deces_total, y_estime)
+MAE(test$deces_total, y_estime)
+
+MSE(apprentissage$deces_total, y_estime)
+MSE(test$deces_total, y_estime)
+
+```
+
 
 
