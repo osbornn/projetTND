@@ -153,13 +153,11 @@ test
 ```{r partie2.4}
 regLi = lm(deces_total~reanimation_total + hospitalises_total + gueris_total, data = apprentissage)
 plot(regLi)
-
-
-
 ```
+
 ## Question 6
 
-#### Calcul du MAE (Min Absolute Error) et MSE (Min Squared Error)
+#### Création de la fonction MAE (Min Absolute Error) et MSE (Min Squared Error)
 ```{r partie2.6}
 MAE = function(y_reel, y_est)
 {
@@ -174,7 +172,10 @@ val = (y_reel-y_est)^2
 mse_cal = mean(val)
 return(mse_cal)
 }
+```
 
+#### Calcul du MAE et MSE graçe à les fonctions crées précédemment
+```{r partie2.6.2}
 y_estime = predict(regLi)
 
 MAE(apprentissage$deces_total, y_estime)
@@ -182,8 +183,16 @@ MAE(test$deces_total, y_estime)
 
 MSE(apprentissage$deces_total, y_estime)
 MSE(test$deces_total, y_estime)
-
 ```
 
+# Partie 3 : clustering des départements selon la dynamique de propagation du virus
+
+## Question 1
+
+
+```{r partie3.1}
+
+
+```
 
 
