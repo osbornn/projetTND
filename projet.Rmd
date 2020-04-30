@@ -151,17 +151,30 @@ test
 
 #### Régression linéaire entre les variables explicatives et la variable à expliquer
 ```{r partie2.4}
-regLi = lm(deces_total~reanimation_total + hospitalises_total + gueris_total, data = apprentissage)
+regLi = lm(deces_total~(reanimation_total + hospitalises_total + gueris_total), data = apprentissage)
 plot(regLi)
-
-#Sur le premier graphique, on observe que les résidus sont dispersés de manière égale autour de la droite horizontale sans suivre une forme de fonction distincte. Donc le mode de régression est bon et il a une bonne capacité de généralisation. 
-
-#Sur le deuxième graphique (Q-Q plot), on observe qu'il suit une ligne droite. On en déduit que le modèle est bon.
-
-#Sur le troisième graphique (Scale-Location), on constate que les résidus se dispersent après la valeur prédite 0. Par conséquent le modèle n'a pas une bonne généralisation. 
-
-
 ```
+
+#### Sur le premier graphique (Residuals vs Fitted), on observe que les résidus sont dispersés de manière égale autour de la droite horizontale sans suivre une forme de fonction distincte. 
+
+#### Sur le deuxième graphique (Q-Q plot), on observe qu'il suit une ligne droite. 
+
+#### Sur le troisième graphique (Scale-Location), les points suivent une droite horizontale.
+
+#### Enfin, sur le quatrième graphique (Residuals vs Leverage) on constate que des valeurs se trouvent en dehors des limites (Cook's distance)
+
+
+## Question 5
+
+### Résultats obtenus
+
+#### D'après le graphique Residuals vs Fitted, le mode de régression est bon et il a une bonne capacité de généralisation.
+
+#### D'après le graphique Normal Q-Q, le modèle est bon puisque les points suivent une ligne droite.
+
+#### Tout comme pour le graphique Residuals vs Fitted, le graphique Scale-Location prouve que le modèle a une bonne généralisation.
+
+#### Enfin, le graphique Residuals vs Leverage montrent qu'il y a des valeurs qui ont une forte influence et qui devraient peut-être être retirées afin d'améliorer la droite de régression. 
 
 ## Question 6
 
