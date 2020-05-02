@@ -212,8 +212,9 @@ MSE(test$deces_total, y_estime)
 
 
 ```{r partie3.1}
-
-
+install.packages("FactoMineR")
+    library(FactoMineR)
+covid.19.PCA=PCA(covid.19[,-1])
 ```
 
 
