@@ -141,8 +141,6 @@ sample = sample.int(n = nrow(covid), size = floor(.80*nrow(covid)))
 apprentissage = covid[sample, ]
 test  = covid[-sample, ]
 
-View(apprentissage)
-#test
 
 ```
 
@@ -230,7 +228,8 @@ covid$deces_total=as.factor(covid$deces_total)
 
 #### Création du graphique coloré
 ```{r partie3.2.2}
-sp= ggplot(covid, aes(color=deces_total)) 
+sp= ggplot(covid, aes(x=deces_total,y=hospitalises_total,color=gueris_total)) + geom_point()
 sp
 ```
+
 
