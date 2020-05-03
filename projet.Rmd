@@ -225,12 +225,12 @@ covid.PCA$eig
 #### Création de la variable deces_total
 ```{r partie3.2}
 library(ggplot2)
-deces=as.factor(covid$deces_total)
+covid$deces_total=as.factor(covid$deces_total)
 ```
 
 #### Création du graphique coloré
 ```{r partie3.2.2}
-sp= ggplot(deces, aes(x=wt, y=mpg, color=cyl)) + geom_point()
+sp= ggplot(covid, aes(color=deces_total)) 
 sp
 ```
 
