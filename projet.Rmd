@@ -141,8 +141,8 @@ sample = sample.int(n = nrow(covid.19), size = floor(.80*nrow(covid.19)))
 apprentissage = covid.19[sample, ]
 test  = covid.19[-sample, ]
 
-apprentissage
-test
+#apprentissage
+#test
 
 ```
 
@@ -182,16 +182,16 @@ plot(regLi)
 ```{r partie2.6}
 MAE = function(y_reel, y_est)
 {
-val = abs(y_reel-y_est)
-mae_cal = mean(val)
-return(mae_cal)
+  val = abs(y_reel-y_est)
+  mae_cal = mean(val)
+  return(mae_cal)
 }
 
 MSE = function(y_reel, y_est)
 {
-val = (y_reel-y_est)^2
-mse_cal = mean(val)
-return(mse_cal)
+  val = (y_reel-y_est)^2
+  mse_cal = mean(val)
+  return(mse_cal)
 }
 ```
 
@@ -208,13 +208,15 @@ MSE(test$deces_total, y_estime)
 
 # Partie 3 : clustering des départements selon la dynamique de propagation du virus
 
+### l'objectif de cette partie est d'étudier la variabilité d'un tableau de données : 
+### À la fin de cette Analyse on sera capable de associer ou dissocier de part les resemblances et les differences des données. On pourra faire émerger les caractéristiques de réponses et proposer une synthèse. 
+
 ## Question 1
 
-
 ```{r partie3.1}
-install.packages("FactoMineR")
-    library(FactoMineR)
-covid.19.PCA=PCA(covid.19[,-1])
+library(FactoMineR)
+covid.19.PCA=PCA(covid.19[,-1]) #création de l'ACP 
+covid.19.PCA$eig
 ```
 
 
