@@ -1,4 +1,5 @@
-#COMANDI UTILI
+# COMANDI UTILI
+
 //per aggiornare repository 
 git pull
 //per forzare un agiornamento git
