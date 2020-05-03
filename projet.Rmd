@@ -11,7 +11,7 @@ output: html_document
 ## Question 1 
 #### Téléchargement du jeu de données et chargement sur R
 ```{r partie1.1}
-covid.19=read.csv("donnees_covid.csv", sep = ";")
+covid=read.csv("donnees_covid.csv", sep = ";")
 ```
 
 ## Question 2
@@ -24,43 +24,43 @@ covid.19=read.csv("donnees_covid.csv", sep = ";")
 ```
 #### Calcul de la dimension
 ```{r partie1.2.1}
-dim(covid.19)
+dim(covid)
 ```
 
 #### Nom variables
 ```{r partie1.2.2}
-names(covid.19)
+names(covid)
 ```
 
 #### Type variable 
 ```{r partie1.2.3}
-typeof(covid.19)
+typeof(covid)
 ```
 
 #### Statistiques générales 
 ```{r partie1.2.4}
-summary(covid.19)
+summary(covid)
 ```
 
 #### Calcul de l'écart type 
 ```{r partie1.2.5}
-apply (covid.19[,-1],2,sd)
+apply (covid[,-1],2,sd)
 ```
 
 #### Réalisation boite à moustache
 ```{r partie1.2.6}
-boxplot(covid.19[,-1])
+boxplot(covid[,-1])
 ```
 
 #### Réalisation histogrammes
 ```{r partie1.2.7}
-hist(covid.19$duree_jours)
-hist(covid.19$latitude)
-hist(covid.19$longitude)
-hist(covid.19$deces_total)
-hist(covid.19$reanimation_total)
-hist(covid.19$hospitalises_total)
-hist(covid.19$gueris_total)
+hist(covid$duree_jours)
+hist(covid$latitude)
+hist(covid$longitude)
+hist(covid$deces_total)
+hist(covid$reanimation_total)
+hist(covid$hospitalises_total)
+hist(covid$gueris_total)
 ```
 
 ## Question 3
@@ -73,28 +73,28 @@ library(leaflet)
 
 #### Couleurs
 ```{r partie1.3.1.2}
-mybins = seq(min(covid.19$deces_total), max(covid.19$deces_total), by=2000)
-mypalette = colorBin( palette = "YlOrRd", domain=covid.19$deces_total, na.color="transparent", bins=mybins)
+mybins = seq(min(covid$deces_total), max(covid$deces_total), by=2000)
+mypalette = colorBin( palette = "YlOrRd", domain=covid$deces_total, na.color="transparent", bins=mybins)
 ```
 
 #### Preparation du texte pour la info-bulle:
 ```{r partie1.3.1.3}
 mytext = paste(
-  "Deces totaux: ", covid.19$deces_total, "<br/>", 
-  "Reanimations totales : ", covid.19$reanimation_total, "<br/>", 
-  "Hospitalises totaux : ", covid.19$hospitalises_total, "<br/>",
-  "Gueris totaux : ", covid.19$gueris_total, sep = "") %>%
+  "Deces totaux: ", covid$deces_total, "<br/>", 
+  "Reanimations totales : ", covid$reanimation_total, "<br/>", 
+  "Hospitalises totaux : ", covid$hospitalises_total, "<br/>",
+  "Gueris totaux : ", covid$gueris_total, sep = "") %>%
   lapply(htmltools::HTML)
 ```
 
 #### Création de la carte
 ```{r partie1.3.1.4}
-m = leaflet(covid.19) %>% 
+m = leaflet(covid) %>% 
   addTiles()  %>% 
   setView( lat=48, lng=2 , zoom=5) %>%
   addProviderTiles("Esri.WorldImagery") %>%
   addCircleMarkers(~longitude, ~latitude, 
-                  fillColor = ~mypalette(covid.19$deces_total), fillOpacity = 0.7, color="white", radius=8, stroke=FALSE,
+                  fillColor = ~mypalette(covid$deces_total), fillOpacity = 0.7, color="white", radius=8, stroke=FALSE,
                    label = mytext,
                    labelOptions = labelOptions( style = list("font-weight" = "normal", padding = "3px 8px"), textsize = "13px", direction = "auto")
   ) %>%
@@ -110,13 +110,13 @@ m
 
 #### Calcul de la corrélation entre les variables "reanimation_total" , "hospitalisation_total" , "gueris_total"
 ```{r partie2.1.1}
-cor(covid.19[,-c(1:5)])
+cor(covid[,-c(1:5)])
 ```
 
 #### Affichage matrice de corrélation
 ```{r partie2.1.1.2}
 #install.packages("corrplot")
-M=cor(covid.19[,-c(1:5)])
+M=cor(covid[,-c(1:5)])
 library(corrplot)
 corrplot(M, method="circle")
 ```
@@ -126,9 +126,9 @@ corrplot(M, method="circle")
 #### Affichage nouages de points
 ```{r partie2.2}
 help("plot")
-plot(covid.19[c(5:6)])
-plot(covid.19$deces_total,covid.19$hospitalises_total)
-plot(covid.19$deces_total,covid.19$gueris_total)
+plot(covid[c(5:6)])
+plot(covid$deces_total,covid$hospitalises_total)
+plot(covid$deces_total,covid$gueris_total)
 ```
 
 #### Les variables qui permettent d'expliquer au mieux la variable à prédire sont les variables "hospitalises_total" et "reanimation_total", car elles permettent de se faire une idée sur le nombre potentiel de personnes décédées. 
@@ -137,11 +137,11 @@ plot(covid.19$deces_total,covid.19$gueris_total)
 
 #### Division du jeu de données en deux sous-ensemble (80%-20%)
 ```{r partie2.3}
-sample = sample.int(n = nrow(covid.19), size = floor(.80*nrow(covid.19)))
-apprentissage = covid.19[sample, ]
-test  = covid.19[-sample, ]
+sample = sample.int(n = nrow(covid), size = floor(.80*nrow(covid)))
+apprentissage = covid[sample, ]
+test  = covid[-sample, ]
 
-#apprentissage
+View(apprentissage)
 #test
 
 ```
@@ -215,8 +215,14 @@ MSE(test$deces_total, y_estime)
 
 ```{r partie3.1}
 library(FactoMineR)
-covid.19.PCA=PCA(covid.19[,-1]) #création de l'ACP 
-covid.19.PCA$eig
+covid.PCA=PCA(covid[,-1]) #création de l'ACP 
+covid.PCA$eig
 ```
 
+
+## Question 2
+
+```{r partie3.2}
+deces_total=covid$deces_total
+```
 
