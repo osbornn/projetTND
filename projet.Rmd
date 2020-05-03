@@ -228,8 +228,41 @@ covid$deces_total=as.factor(covid$deces_total)
 
 #### Création du graphique coloré
 ```{r partie3.2.2}
-sp= ggplot(covid, aes(x=deces_total,y=hospitalises_total,color=gueris_total)) + geom_point()
+sp = ggplot(covid, aes(x = latitude,y=longitude,color=-deces_total)) + geom_point()
 sp
+
+#On remarque que le nombre plus important de décès a lieu sur le continent français puisque les points sont répartis le plus à l'est sur le graphique. 
 ```
 
+```{r partie 3.2.3}
+library(cluster)
 
+covid_values = covid[,-1]
+
+ratio_ss <- data.frame(cluster = seq(from = 1, to = 5, by = 1)) 
+for (k in 1:5) {
+  km_covid <- kmeans(covid_values, k, nstart = 20)
+  ratio_ss$ratio[k] <- km_covid$tot.withinss / km_covid$totss
+}
+
+ggplot(ratio_ss, aes(cluster, ratio)) + 
+geom_line() +
+geom_point()
+
+#On observe que le cluster se trouve entre 2 et 3. Donc on réalise deux k-means avec ces deux valeurs.
+
+km_covid <- covid_values %>% 
+kmeans(centers = 2, nstart=20)
+covid_values$cluster <- km_covid$cluster
+ggplot(covid_values, aes(x = deces_total, y = hospitalises_total, col = gueris_total)) + 
+geom_point(size = 2, alpha = 0.8, position = "jitter")
+
+km_covid <- covid_values %>% 
+kmeans(centers = 3, nstart=20)
+covid_values$cluster <- km_covid$cluster
+ggplot(covid_values, aes(x = deces_total, y = hospitalises_total, col = gueris_total)) + 
+geom_point(size = 2, alpha = 0.8, position = "jitter")
+
+#Reste à faire le CAH
+
+```
