@@ -1,3 +1,4 @@
+#COMANDI UTILI
 git pull aggiorna cartella sul proprio pc
 
 git add per aggiungere
