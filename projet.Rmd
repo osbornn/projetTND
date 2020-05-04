@@ -230,11 +230,11 @@ covid$deces_total=as.factor(covid$deces_total)
 ```{r partie3.2.2}
 sp = ggplot(covid, aes(x = latitude,y=longitude,color=-deces_total)) + geom_point()
 sp
-
-#On remarque que le nombre plus important de décès a lieu sur le continent français puisque les points sont répartis le plus à l'est sur le graphique. 
 ```
+#### On remarque que le nombre plus important de décès a lieu sur le continent français puisque les points sont répartis le plus à l'est sur le graphique. 
 
-```{r partie 3.2.3}
+## Question 3
+```{r partie 3.3.1}
 library(cluster)
 
 covid_values = covid[,-1]
@@ -248,9 +248,11 @@ for (k in 1:5) {
 ggplot(ratio_ss, aes(cluster, ratio)) + 
 geom_line() +
 geom_point()
+```
 
-#On observe que le cluster se trouve entre 2 et 3. Donc on réalise deux k-means avec ces deux valeurs.
+#### On observe que le cluster se trouve entre 2 et 3. Donc on réalise deux k-means avec ces deux valeurs.
 
+```{r partie 3.3.2}
 km_covid <- covid_values %>% 
 kmeans(centers = 2, nstart=20)
 covid_values$cluster <- km_covid$cluster
