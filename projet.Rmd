@@ -213,8 +213,9 @@ MSE(test$deces_total, y_estime)
 
 ```{r partie3.1}
 library(FactoMineR)
-covid.PCA=PCA(covid[,-1]) #création de l'ACP 
-covid.PCA$eig
+covid.PCA = PCA(X = covid[,-1], ncp = 10)#création de l'ACP 
+#covid.PCA$eig
+barplot(covid.PCA$eig[,2])
 ```
 
 
@@ -228,7 +229,7 @@ covid$deces_total=as.factor(covid$deces_total)
 
 #### Création du graphique coloré
 ```{r partie3.2.2}
-sp = ggplot(covid, aes(x = latitude,y=longitude,color=-deces_total)) + geom_point()
+sp = ggplot(covid, aes(x = latitude,y=longitude,color=deces_total)) + geom_point()
 sp
 ```
 #### On remarque que le nombre plus important de décès a lieu sur le continent français puisque les points sont répartis le plus à l'est sur le graphique. 
