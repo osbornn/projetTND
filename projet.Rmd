@@ -260,10 +260,8 @@ geom_point()
 
 #### On observe que le cluster se trouve entre 2 et 3. Donc on réalise deux k-means avec ces deux valeurs.
 
+#### K-means
 ```{r partie 3.3.2}
-#da questa riga in poi mi da errore 
-#K-means
-
 km_covid = covid_values %>% 
 kmeans(centers = 2, nstart=20)
 covid_values$cluster = km_covid$cluster
@@ -275,14 +273,17 @@ kmeans(centers = 3, nstart=20)
 covid_values$cluster = km_covid$cluster
 ggplot(covid_values, aes(x = deces_total, y = hospitalises_total, col = gueris_total)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
+```
 
-#CAH
-
+#### CAH
+```{r partie 3.3.3}
 z = covid[, -c(1,1)]
 
 z.numeric = transform(z, duree_jours = as.numeric(duree_jours), deces_total = as.numeric(deces_total), reanimation_total = as.numeric(reanimation_total), hospitalises_total = as.numeric(hospitalises_total), gueris_total = as.numeric(gueris_total)) 
-#on convertit le data frame en double
+```
 
+#### On convertit le data frame en double
+```{r partie 3.3.4}
 z.scale = scale(z.numeric)
 
 distance = dist(z.scale, method = "euclidean")
@@ -296,12 +297,12 @@ plot(covid.ward, labels = covid$maille_nom)
 plot(covid.minimum, labels = covid$maille_nom)
 plot(covid.maximum, labels = covid$maille_nom)
 plot(covid.moyen, labels = covid$maille_nom)
-
-
-
-
-
-
-
 ```
+
+
+
+
+
+
+
 
