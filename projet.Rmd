@@ -213,14 +213,18 @@ MSE(test$deces_total, y_estime)
 
 ```{r partie3.1}
 library(FactoMineR)
+
 covid.PCA = PCA(X = covid[,-1], ncp = 10)#création de l'ACP 
 #covid.PCA$eig
 barplot(covid.PCA$eig[,2])
-data.PCA <- PCA(X = covid[,-1], ncp = 10)
 ```
 
+#### -Le plan d'inertie maximum recueille environ 70% de l'inertie totale
+#### -Les variables 'gueris_total','hospitalies_total','reanimation_total','deces_total' sont corrélées positivement à la composante 1 (qu'on appellera C1) alors qu'elles sont très peu corrélées à la composante 2 (qu'on appelle C2) 
+#### - La variable 'duree_jour' est corrélée négativement à C1 et C2 
+#### -Les variables 'longitude' et 'latitude' sont peu corrélées à C1 et au contraire très corrélées a C2.
+#### -Si l'on considère les sous espaces décrivant les différents départements on peut en déduire que la composant 1 (C1) représente majoritairement le temps, comme les décès les guérisons et les hospitalisations augmentes alors que la durée de la maladie diminue; ainsi que la composant 2(C2) décrit spécialement la capacité de contagion vue que cela dépend beaucoup de la zone d'infection mais elle n'est pas liée de manière significative ni à la durée des jours ni aux guérisons ou aux décès.
 
-#### Le plan d'inertie maximum receuille environ 60% de l'inertie totale
 
 ## Question 2
 
@@ -257,6 +261,7 @@ geom_point()
 #### On observe que le cluster se trouve entre 2 et 3. Donc on réalise deux k-means avec ces deux valeurs.
 
 ```{r partie 3.3.2}
+#da questa riga in poi mi da errore 
 #K-means
 
 km_covid <- covid_values %>% 
