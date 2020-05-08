@@ -247,10 +247,10 @@ library(cluster)
 
 covid_values = covid[,-1]
 
-ratio_ss <- data.frame(cluster = seq(from = 1, to = 5, by = 1)) 
+ratio_ss = data.frame(cluster = seq(from = 1, to = 5, by = 1)) 
 for (k in 1:5) {
-  km_covid <- kmeans(covid_values, k, nstart = 20)
-  ratio_ss$ratio[k] <- km_covid$tot.withinss / km_covid$totss
+  km_covid = kmeans(covid_values, k, nstart = 20)
+  ratio_ss$ratio[k] = km_covid$tot.withinss / km_covid$totss
 }
 
 ggplot(ratio_ss, aes(cluster, ratio)) + 
@@ -264,28 +264,28 @@ geom_point()
 #da questa riga in poi mi da errore 
 #K-means
 
-km_covid <- covid_values %>% 
+km_covid = covid_values %>% 
 kmeans(centers = 2, nstart=20)
-covid_values$cluster <- km_covid$cluster
+covid_values$cluster = km_covid$cluster
 ggplot(covid_values, aes(x = deces_total, y = hospitalises_total, col = gueris_total)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
 
-km_covid <- covid_values %>% 
+km_covid = covid_values %>% 
 kmeans(centers = 3, nstart=20)
-covid_values$cluster <- km_covid$cluster
+covid_values$cluster = km_covid$cluster
 ggplot(covid_values, aes(x = deces_total, y = hospitalises_total, col = gueris_total)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
 
 #CAH
 
-z <- covid[, -c(1,1)]
+z = covid[, -c(1,1)]
 
 z.numeric = transform(z, duree_jours = as.numeric(duree_jours), deces_total = as.numeric(deces_total), reanimation_total = as.numeric(reanimation_total), hospitalises_total = as.numeric(hospitalises_total), gueris_total = as.numeric(gueris_total)) 
 #on convertit le data frame en double
 
 z.scale = scale(z.numeric)
 
-distance <- dist(z.scale, method = "euclidean")
+distance = dist(z.scale, method = "euclidean")
 
 covid.ward = hclust(distance, method = "ward.D")
 covid.minimum = hclust(distance, method = "single")
