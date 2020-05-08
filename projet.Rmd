@@ -254,6 +254,7 @@ geom_point()
 #### On observe que le cluster se trouve entre 2 et 3. Donc on réalise deux k-means avec ces deux valeurs.
 
 ```{r partie 3.3.2}
+#da questa riga in poi mi da errore 
 #K-means
 
 km_covid <- covid_values %>% 
