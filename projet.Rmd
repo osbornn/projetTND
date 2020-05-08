@@ -213,11 +213,16 @@ MSE(test$deces_total, y_estime)
 
 ```{r partie3.1}
 library(FactoMineR)
-covid.PCA = PCA(X = covid[,-1], ncp = 10)#création de l'ACP 
+
+#non so perché ma adesso questo non me lo compila più
+covid.PCA = PCA(X = covid[,-1], ncp = 10)#création de l'ACP @
 #covid.PCA$eig
 barplot(covid.PCA$eig[,2])
+data.PCA <- PCA(X = covid[,-1], ncp = 10)
 ```
 
+
+#### Le plan d'inertie maximum receuille environ 60% de l'inertie totale
 
 ## Question 2
 
