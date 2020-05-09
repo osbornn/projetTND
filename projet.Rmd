@@ -17,11 +17,11 @@ covid=read.csv("donnees_covid.csv", sep = ";")
 ## Question 2
 
 #### Description du jeu de données 
-```{r partie1.description}
-# Dataframe contenant les donnéés avec 8 variables 
-#maille_nom : nom des provinces françaises
+
+#### Dataframe contenant les donnéés avec 8 variables 
+##### Maille_nom : nom des provinces françaises
 #
-```
+
 #### Calcul de la dimension
 ```{r partie1.2.1}
 dim(covid)
@@ -306,6 +306,7 @@ plot(covid.moyen, labels = covid$maille_nom)
 
 ```{r partie 4.1}
 fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
+
 ```
 
 
