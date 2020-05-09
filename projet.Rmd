@@ -317,6 +317,8 @@ plot(covid.moyen, labels = covid$maille_nom)
 
 ## Question 5
 
+#### D'après l'analyse des résultats des trois parties on peut en déduir que toute la France métropolitaine a été touchée par l'épidemie ainsi que le le taux de contagion de guérison augmente et d'hospitalisation avec le temps.
+
 
 # Bonus 
 
