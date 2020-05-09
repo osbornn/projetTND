@@ -16,12 +16,18 @@ covid=read.csv("donnees_covid.csv", sep = ";")
 
 ## Question 2
 
-#### Description du jeu de données 
-```{r partie1.description}
-# Dataframe contenant les donnéés avec 8 variables 
-#maille_nom : nom des provinces françaises
-#
-```
+### Description du jeu de données :
+
+####  Dataframe contenant les donnéés avec 8 variables 
+#### -Maille_nom : nom des provinces françaises
+#### - Duree_jours : indique les jours 
+#### - Latitude : indique la latitude géographique
+#### - Longitude : indique la longitude géographique
+#### - Deces_total : indiquele nombre de déces totaux
+#### - Reanimation_jours : indique le nombre de patients en réanimation
+#### - Hospitalise_total : indique le nombre de patients hospitalises
+#### - Gueris_jours : indique le nombre de guéris
+
 #### Calcul de la dimension
 ```{r partie1.2.1}
 dim(covid)
@@ -45,6 +51,11 @@ summary(covid)
 #### Calcul de l'écart type 
 ```{r partie1.2.5}
 apply (covid[,-1],2,sd)
+```
+
+#### Diagramme en secteur
+```{r partie1.2.10}
+pie(table(covid$duree_jours))
 ```
 
 #### Réalisation boite à moustache
@@ -125,7 +136,6 @@ corrplot(M, method="circle")
 
 #### Affichage nouages de points
 ```{r partie2.2}
-help("plot")
 plot(covid[c(5:6)])
 plot(covid$deces_total,covid$hospitalises_total)
 plot(covid$deces_total,covid$gueris_total)
@@ -251,10 +261,10 @@ library(cluster)
 
 covid_values = covid[,-1]
 
-ratio_ss <- data.frame(cluster = seq(from = 1, to = 5, by = 1)) 
+ratio_ss = data.frame(cluster = seq(from = 1, to = 5, by = 1)) 
 for (k in 1:5) {
-  km_covid <- kmeans(covid_values, k, nstart = 20)
-  ratio_ss$ratio[k] <- km_covid$tot.withinss / km_covid$totss
+  km_covid = kmeans(covid_values, k, nstart = 20)
+  ratio_ss$ratio[k] = km_covid$tot.withinss / km_covid$totss
 }
 
 ggplot(ratio_ss, aes(cluster, ratio)) + 
@@ -264,32 +274,33 @@ geom_point()
 
 #### On observe que le cluster se trouve entre 2 et 3. Donc on réalise deux k-means avec ces deux valeurs.
 
+#### K-means
 ```{r partie 3.3.2}
-#da questa riga in poi mi da errore 
-#K-means
-
-km_covid <- covid_values %>% 
+km_covid = covid_values %>% 
 kmeans(centers = 2, nstart=20)
-covid_values$cluster <- km_covid$cluster
+covid_values$cluster = km_covid$cluster
 ggplot(covid_values, aes(x = deces_total, y = hospitalises_total, col = gueris_total)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
 
-km_covid <- covid_values %>% 
+km_covid = covid_values %>% 
 kmeans(centers = 3, nstart=20)
-covid_values$cluster <- km_covid$cluster
+covid_values$cluster = km_covid$cluster
 ggplot(covid_values, aes(x = deces_total, y = hospitalises_total, col = gueris_total)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
+```
 
-#CAH
-
-z <- covid[, -c(1,1)]
+#### CAH
+```{r partie 3.3.3}
+z = covid[, -c(1,1)]
 
 z.numeric = transform(z, duree_jours = as.numeric(duree_jours), deces_total = as.numeric(deces_total), reanimation_total = as.numeric(reanimation_total), hospitalises_total = as.numeric(hospitalises_total), gueris_total = as.numeric(gueris_total)) 
-#on convertit le data frame en double
+```
 
+#### On convertit le data frame en double
+```{r partie 3.3.4}
 z.scale = scale(z.numeric)
 
-distance <- dist(z.scale, method = "euclidean")
+distance = dist(z.scale, method = "euclidean")
 
 covid.ward = hclust(distance, method = "ward.D")
 covid.minimum = hclust(distance, method = "single")
@@ -300,12 +311,17 @@ plot(covid.ward, labels = covid$maille_nom)
 plot(covid.minimum, labels = covid$maille_nom)
 plot(covid.maximum, labels = covid$maille_nom)
 plot(covid.moyen, labels = covid$maille_nom)
+```
 
 
+# Bonus 
 
+#### Chargement du jeu de données Fatality
 
-
-
+```{r partie 4.1}
+fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
 
 ```
+
+
 
