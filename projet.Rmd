@@ -301,8 +301,13 @@ plot(covid.moyen, labels = covid$maille_nom)
 
 
 
+# Bonus 
 
+#### chargement du jeu de données Fatality
 
+```{r partie 4.1}
+fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
+```
 
 
 
