@@ -290,10 +290,9 @@ geom_point(size = 2, alpha = 0.8, position = "jitter")
 z = covid[, -c(1,1)]
 
 z.numeric = transform(z, duree_jours = as.numeric(duree_jours), deces_total = as.numeric(deces_total), reanimation_total = as.numeric(reanimation_total), hospitalises_total = as.numeric(hospitalises_total), gueris_total = as.numeric(gueris_total)) 
-```
 
-#### On convertit le data frame en double
-```{r partie 3.3.4}
+# On convertit le data frame en double
+
 z.scale = scale(z.numeric)
 
 distance = dist(z.scale, method = "euclidean")
