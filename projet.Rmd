@@ -25,8 +25,8 @@ covid=read.csv("donnees_covid.csv", sep = ";")
 #### - Longitude : indique la longitude géographique
 #### - Deces_total : indiquele nombre de déces totaux
 #### - Reanimation_jours : indique le nombre de patients en réanimation
-#### - Hospitalise_total : indique 
-#### - Gueris_jours : indique
+#### - Hospitalise_total : indique le nombre de patients hospitalises
+#### - Gueris_jours : indique le nombre de guéris
 
 #### Calcul de la dimension
 ```{r partie1.2.1}
@@ -51,6 +51,11 @@ summary(covid)
 #### Calcul de l'écart type 
 ```{r partie1.2.5}
 apply (covid[,-1],2,sd)
+```
+
+#### Diagramme en secteur
+```{r partie1.2.10}
+pie(table(covid))
 ```
 
 #### Réalisation boite à moustache
