@@ -214,6 +214,13 @@ MSE(apprentissage$deces_total, y_estime)
 MSE(test$deces_total, y_estime)
 ```
 
+## Question 7
+
+#### On observe que le résultat obtenu par la MAE sur l'ensemble d'apprentissage est inférieur au résultat obtenu par la MAE sur l'ensemble de test. En effet, la MAE  obtenue sur l'ensemble d'apprentissage est généralement inférieure à celle obtenue sur l'ensemble de test, puisque l'ensemble de test n'est pas vu par le modèle donc on s'attend généralement à ce que la MAE sur l'ensemble de test soit plus élevée.
+#### On observe que la MSE executée sur l'ensemble d'apprentissage donne un résultat bien inférieur à la MSE executée sur l'ensemble de test. On en déduit que le modèle est trop rempli car il y a une grande différence entre les deux MSE calculées : on est face à un modèle qui teste bien par échantillon, mais qui a une faible capacité à prédire lorsque testé en dehors d'un échantillon. 
+#### Par conséquent on en déduit que notre modèle peut prédire le nombre de décès pour un département donné avec une précision élevée, mais avec une faible précision pour l'ensemble des départements. 
+
+
 # Partie 3 : clustering des départements selon la dynamique de propagation du virus
 
 ### L'objectif de cette partie est d'étudier la variabilité d'un tableau de données : 
@@ -291,7 +298,7 @@ z = covid[, -c(1,1)]
 
 z.numeric = transform(z, duree_jours = as.numeric(duree_jours), deces_total = as.numeric(deces_total), reanimation_total = as.numeric(reanimation_total), hospitalises_total = as.numeric(hospitalises_total), gueris_total = as.numeric(gueris_total)) 
 
-# On convertit le data frame en double
+# On a converti le data frame en double
 
 z.scale = scale(z.numeric)
 
@@ -307,6 +314,8 @@ plot(covid.minimum, labels = covid$maille_nom)
 plot(covid.maximum, labels = covid$maille_nom)
 plot(covid.moyen, labels = covid$maille_nom)
 ```
+
+## Question 5
 
 
 # Bonus 
