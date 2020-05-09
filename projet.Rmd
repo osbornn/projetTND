@@ -55,7 +55,7 @@ apply (covid[,-1],2,sd)
 
 #### Diagramme en secteur
 ```{r partie1.2.10}
-pie(table(covid))
+pie(table(covid$duree_jours))
 ```
 
 #### Réalisation boite à moustache
@@ -136,7 +136,6 @@ corrplot(M, method="circle")
 
 #### Affichage nouages de points
 ```{r partie2.2}
-help("plot")
 plot(covid[c(5:6)])
 plot(covid$deces_total,covid$hospitalises_total)
 plot(covid$deces_total,covid$gueris_total)
