@@ -240,7 +240,7 @@ barplot(covid.PCA$eig[,2])
 #### - Les variables 'gueris_total','hospitalies_total','reanimation_total','deces_total' sont corrélées positivement à la composante 1 (qu'on appellera C1) alors qu'elles sont très peu corrélées à la composante 2 (qu'on appelle C2) 
 #### - La variable 'duree_jour' est corrélée négativement à C1 et C2 
 #### - Les variables 'longitude' et 'latitude' sont peu corrélées à C1 et au contraire très corrélées a C2.
-#### - Si l'on considère les sous espaces décrivant les différents départements on peut en déduire que la composant 1 (C1) représente majoritairement le temps, comme les décès les guérisons et les hospitalisations augmentes alors que la durée de la maladie diminue; ainsi que la composant 2(C2) décrit spécialement la capacité de contagion vue que cela dépend beaucoup de la zone d'infection mais elle n'est pas liée de manière significative ni à la durée des jours ni aux guérisons ou aux décès.
+#### - Si l'on considère les sous espaces décrivant les différents départements on peut en déduire que la composant 1 (C1) représente majoritairement le temps, puisque les décès les guérisons et les hospitalisations augmentent alors que la durée de la maladie diminue; la composante 2 (C2) décrit la capacité de contamination vu que cela dépend beaucoup de la zone d'infection mais elle n'est pas liée de manière significative ni à la durée des jours ni aux guérisons ou aux décès.
 
 
 ## Question 2
@@ -308,7 +308,9 @@ covid.ward = hclust(distance, method = "ward.D")
 covid.minimum = hclust(distance, method = "single")
 covid.maximum = hclust(distance, method = "complete")
 covid.moyen = hclust(distance, method = "average")
-
+```
+## Question 4
+```{r partie 3.3.4}
 plot(covid.ward, labels = covid$maille_nom)
 plot(covid.minimum, labels = covid$maille_nom)
 plot(covid.maximum, labels = covid$maille_nom)
@@ -317,8 +319,11 @@ plot(covid.moyen, labels = covid$maille_nom)
 
 ## Question 5
 
-#### D'après l'analyse des résultats des trois parties on peut en déduire que toute la France métropolitaine a été touchée par l'épidémie ainsi que le taux de contagion, de guérison et d'hospitalisation augmentent avec le temps.
-#### Le nombre de morts peut être prévu uniquement en analysant chaque département,
+#### D'après l'analyse des résultats de la première partie on peut en déduire que toute la France métropolitaine a été touchée par l'épidémie. 
+#### D'après l'analyse de la deuxième partie, il est possible de prédire avec une bonne précision le nombre de morts pour chaque département en fonction des personnes en réanimation, hospitalisées et guéries, mais il est difficile de le prédire avec précision pour l'ensemble des départements.  
+### D'après l'analyse de la troisième partie, le nombre de malades, de morts et de guéris augmente avec le temps. De plus, le CAH montre qu'il y a des données similaires entre plusieurs départements dans le jeu de données, mais on remarque que Paris présente des données différentes par rapport à celles des autres pays. 
+
+#### Ainsi on en déduit de ces analyses que l'ensemble de la France est touchée par le covid 19. Le nombre de morts, de malades et de guéris vont augmenter avec le temps, même s'il est difficile de prédire ces données avec précision pour l'ensemble des départements français. Enfin, plusieurs départements français se retrouvent dans une situation similaire, mais Paris se distingue d'eux par son nombre plus important de personnes touchées par le virus. 
 
 
 # Bonus 
