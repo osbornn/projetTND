@@ -16,11 +16,17 @@ covid=read.csv("donnees_covid.csv", sep = ";")
 
 ## Question 2
 
-#### Description du jeu de données 
+### Description du jeu de données :
 
-#### Dataframe contenant les donnéés avec 8 variables 
-##### Maille_nom : nom des provinces françaises
-#
+####  Dataframe contenant les donnéés avec 8 variables 
+#### -Maille_nom : nom des provinces françaises
+#### - Duree_jours : indique les jours 
+#### - Latitude : indique la latitude géographique
+#### - Longitude : indique la longitude géographique
+#### - Deces_total : indiquele nombre de déces totaux
+#### - Reanimation_jours : indique le nombre de patients en réanimation
+#### - Hospitalise_total : indique 
+#### - Gueris_jours : indique
 
 #### Calcul de la dimension
 ```{r partie1.2.1}
