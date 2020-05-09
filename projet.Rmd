@@ -213,10 +213,6 @@ MAE(test$deces_total, y_estime)
 MSE(apprentissage$deces_total, y_estime)
 MSE(test$deces_total, y_estime)
 ```
-## Question 7
-
-### On observe que la MAE et la MSE appliqués sur l'ensemble d'apprentissage donnent des résultats inférieurs aux résultats obtenus ### en appliquant la MAE et la MSE sur l'ensemble de test. En effet la MAE et MSE appliqués sur l'ensemble de test permettent de ### prédire les erreurs pour le modèle en question, donc les résultats sont plus élevés. On observe que la Min Aboslute Error 
-### appliquée sur l'ensemble de test donne un résultat égal à 1340.958. On en déduit que l'on peut prédire le nombre de décès pour ### un département donné avec une précision de 1340.985.
 
 # Partie 3 : clustering des départements selon la dynamique de propagation du virus
 
