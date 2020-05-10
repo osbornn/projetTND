@@ -334,21 +334,21 @@ plot(covid.moyen, labels = covid$maille_nom)
 ### Chargement du jeu de données Fatality
 
 ```{r partie 4.1}
-fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
+Fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
 ```
 
 ### Élimination de toutes les variables quantitatives du jeu de données fatality: 
 ```{r partie 4.2}
 fatalityStudy=fatality[,-c(1:2)]
-fatality= fatalityStudy[,-c(4:5)]
+Fatality= fatalityStudy[,-c(4:5)]
 rm(fatalityStudy)
 ```
 
 ### Subdivision du jeu de données en 3 sous groups
 ```{r partie 4.3}
-group1=fatality[c(1:122),]
-group2=fatality[c(123:245),]
-group3=fatality[-c(1:245),]
+group1=Fatality[c(1:122),]
+group2=Fatality[c(123:245),]
+group3=Fatality[-c(1:245),]
 ```
 ### Présentation du jeu :
 #### Le jeu de données qu'on va analyser est un dataframe contenent 48 observations concernants le trafic autoroutier des États Unis. Il se compose de 6 variables dont :
@@ -358,5 +358,7 @@ group3=fatality[-c(1:245),]
 #### - vmiles : représente la moyenne de miles par conducteur
 #### - unrate : représente le taux de chômage
 #### - pernic : représente le revenu par habitant
+
+
 
 
