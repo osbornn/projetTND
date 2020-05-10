@@ -544,57 +544,68 @@ geom_point()
 
 ```
 
-#On remarque que le cluster se trouve entre 2 et 3
+#### On remarque que le cluster se trouve entre 2 et 3
 
-```{r partie K-means 2}
 
-#Groupe 1
 
-#Avec 2 comme centre
+### Groupe 1
+
+#### Avec 2 comme centre
+```{r partie K-means 2.1}
 km_group1 = group1 %>% 
 kmeans(centers = 2, nstart=20)
 group1$cluster = km_group1$cluster
 ggplot(group1, aes(x = beertax, y = unrate, col = mrall)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
+```
 
-#Avec 3 comme centre
+```{r partie K-means 2.2}
+#### Avec 3 comme centre
 km_group1 = group1 %>% 
 kmeans(centers = 3, nstart=20)
 group1$cluster = km_group1$cluster
 ggplot(group1, aes(x = beertax, y = unrate, col = mrall)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
+```
 
-#Groupe 2
 
-#Avec 2 comme centre
+### Groupe 2
+
+#### Avec 2 comme centre
+```{r partie K-means 2.3}
 km_group2 = group2 %>% 
 kmeans(centers = 2, nstart=20)
 group2$cluster = km_group2$cluster
 ggplot(group2, aes(x = beertax, y = unrate, col = mrall)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
+```
 
-#Avec 3 comme centre
+#### Avec 3 comme centre
+```{r partie K-means 2.4}
 km_group2 = group2 %>% 
 kmeans(centers = 3, nstart=20)
 group2$cluster = km_group2$cluster
 ggplot(group2, aes(x = beertax, y = unrate, col = mrall)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
+```
+### Groupe 3
 
-#Groupe 3
-
-#Avec 2 comme centre
+#### Avec 2 comme centre
+```{r partie K-means 2.5}
 km_group3 = group3 %>% 
 kmeans(centers = 2, nstart=20)
 group3$cluster = km_group3$cluster
 ggplot(group3, aes(x = beertax, y = unrate, col = mrall)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
-
-#Avec 3 comme centre
+```
+### Avec 3 comme centre
+```{r partie K-means 2.6}
 km_group3 = group3 %>% 
 kmeans(centers = 3, nstart=20)
 group3$cluster = km_group3$cluster
 ggplot(group3, aes(x = beertax, y = unrate, col = mrall)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
+```
 
 ### ACP 
 ```{r partie 4.4.5}
