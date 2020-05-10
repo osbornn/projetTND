@@ -339,7 +339,7 @@ Fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
 
 ### Élimination de toutes les variables quantitatives du jeu de données fatality: 
 ```{r partie 4.2}
-fatalityStudy=fatality[,-c(1:2)]
+fatalityStudy=Fatality[,-c(1:2)]
 Fatality= fatalityStudy[,-c(4:5)]
 rm(fatalityStudy)
 ```
@@ -360,5 +360,36 @@ group3=Fatality[-c(1:245),]
 #### - pernic : représente le revenu par habitant
 
 
+## Interprétation des caractéristiques suivant l'ensemble des variables des différents dataframes
+
+#### Dimension de chaque groupe
+```{r partie 4.4.1}
+dim(group1)
+dim(group2)
+dim(group3)
+```
+
+#### boxplot de chaque groupe
+```{r partie 4.4.2}
+boxplot(group1)
+boxplot(group2)
+boxplot(group3)
+```
+
+#### diagramme circulaire de chaque groupe
+```{r partie 4.4.3}
+pie(table(group1$mlda))
+pie(table(group2$mlda))
+pie(table(group3$mlda))
+
+
+```
+
+#### Statistiques générales de chaque groupe
+```{r partie 4.4.4}
+summary(group1)
+summary(group2)
+summary(group3)
+```
 
 
