@@ -433,20 +433,23 @@ boxplot(group2)
 boxplot(group3)
 ```
 
-#### diagramme circulaire de chaque groupe
+#### Diagramme circulaire de chaque groupe
 ```{r partie 4.4.3}
 pie(table(group1$mlda))
 pie(table(group2$mlda))
 pie(table(group3$mlda))
-
 ```
 
 #### Hist de chaque groupe
 ```{r partie 4.4.3.1}
 hist(table(group1$mlda))
-pie(table(group2$mlda))
-pie(table(group3$mlda))
+hist(table(group1$beertax))
+hist(table(group2$mlda))
+hist(table(group2$beertax))
+hist(table(group3$mlda))
+hist(table(group3$beertax))
 ```
+
 #### Statistiques générales de chaque groupe
 ```{r partie 4.4.4}
 summary(group1)
@@ -454,7 +457,7 @@ summary(group2)
 summary(group3)
 ```
 
-#### 
+#### ACP 
 ```{r partie 4.4.5}
 library(FactoMineR)
 group1.PCA = PCA(X = group1, ncp = 10)
