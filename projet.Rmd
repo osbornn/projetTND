@@ -114,14 +114,13 @@ m = leaflet(covid) %>%
 m 
 ```
 
-## Question 4
+## Question 4 (Bonus)
 
 ### Data
 ```{r partie1.4.1}
-
 library(leaflet)
+library(leaflet.minicharts)
 library(dplyr)
-
 ```
 
 ### Création de la Map
