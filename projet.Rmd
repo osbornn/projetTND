@@ -344,4 +344,10 @@ fatality= fatalityStudy[,-c(4:5)]
 rm(fatalityStudy)
 ```
 
+#### Subdivision du jeu de données en 3 sous groups
+```{r partie 4.3}
+group1=fatality[c(1:122),]
+group2=fatality[c(123:245),]
+group3=fatality[-c(1:245),]
+```
 
