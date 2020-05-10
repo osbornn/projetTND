@@ -114,15 +114,13 @@ m = leaflet(covid) %>%
 m 
 ```
 
-## Question 4
+## Question 4 (Bonus)
 
 ### Data
 ```{r partie1.4.1}
-
 library(leaflet)
 library(leaflet.minicharts)
 library(dplyr)
-
 ```
 
 ### Création de la Map
@@ -428,23 +426,37 @@ dim(group2)
 dim(group3)
 ```
 
-#### boxplot de chaque groupe
-```{r partie 4.4.2}
+```{r partie 4.4.2.1}
+plot(group1[c(2:3)])
+plot(group2[c(2:3)])
+plot(group3[c(2:3)])
+```
+
+### boxplot de chaque groupe
+```{r partie 4.4.2.2}
 boxplot(group1)
 boxplot(group2)
 boxplot(group3)
 ```
 
-#### diagramme circulaire de chaque groupe
+### Diagramme circulaire de chaque groupe
 ```{r partie 4.4.3}
 pie(table(group1$mlda))
 pie(table(group2$mlda))
 pie(table(group3$mlda))
-
-
 ```
 
-#### Statistiques générales de chaque groupe
+### Hist de chaque groupe
+```{r partie 4.4.3.1}
+hist(table(group1$mlda))
+hist(table(group1$beertax))
+hist(table(group2$mlda))
+hist(table(group2$beertax))
+hist(table(group3$mlda))
+hist(table(group3$beertax))
+```
+
+### Statistiques générales de chaque groupe
 ```{r partie 4.4.4}
 summary(group1)
 summary(group2)
@@ -584,5 +596,11 @@ group3$cluster = km_group3$cluster
 ggplot(group3, aes(x = beertax, y = unrate, col = mrall)) + 
 geom_point(size = 2, alpha = 0.8, position = "jitter")
 
+### ACP 
+```{r partie 4.4.5}
+library(FactoMineR)
+group1.PCA = PCA(X = group1, ncp = 10)
+group2.PCA = PCA(X = group2, ncp = 10)
+group3.PCA = PCA(X = group3, ncp = 10)
 ```
 
