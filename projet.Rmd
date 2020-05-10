@@ -426,14 +426,14 @@ dim(group2)
 dim(group3)
 ```
 
-```{r partie 4.4.2}
-plot(covid[c(5:6)])
-
-
+```{r partie 4.4.2.1}
+plot(group1[c(2:3)])
+plot(group2[c(2:3)])
+plot(group3[c(2:3)])
 ```
 
 ### boxplot de chaque groupe
-```{r partie 4.4.2}
+```{r partie 4.4.2.2}
 boxplot(group1)
 boxplot(group2)
 boxplot(group3)
