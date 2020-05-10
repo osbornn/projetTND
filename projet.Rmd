@@ -392,21 +392,21 @@ plot(covid.moyen, labels = covid$maille_nom)
 ### Chargement du jeu de données Fatality
 
 ```{r partie 4.1}
-fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
+Fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
 ```
 
 ### Élimination de toutes les variables quantitatives du jeu de données fatality: 
 ```{r partie 4.2}
-fatalityStudy=fatality[,-c(1:2)]
-fatality= fatalityStudy[,-c(4:5)]
+fatalityStudy=Fatality[,-c(1:2)]
+Fatality= fatalityStudy[,-c(4:5)]
 rm(fatalityStudy)
 ```
 
 ### Subdivision du jeu de données en 3 sous groups
 ```{r partie 4.3}
-group1=fatality[c(1:122),]
-group2=fatality[c(123:245),]
-group3=fatality[-c(1:245),]
+group1=Fatality[c(1:122),]
+group2=Fatality[c(123:245),]
+group3=Fatality[-c(1:245),]
 ```
 ### Présentation du jeu :
 #### Le jeu de données qu'on va analyser est un dataframe contenent 48 observations concernants le trafic autoroutier des États Unis. Il se compose de 6 variables dont :
@@ -416,5 +416,38 @@ group3=fatality[-c(1:245),]
 #### - vmiles : représente la moyenne de miles par conducteur
 #### - unrate : représente le taux de chômage
 #### - pernic : représente le revenu par habitant
+
+
+## Interprétation des caractéristiques suivant l'ensemble des variables des différents dataframes
+
+#### Dimension de chaque groupe
+```{r partie 4.4.1}
+dim(group1)
+dim(group2)
+dim(group3)
+```
+
+#### boxplot de chaque groupe
+```{r partie 4.4.2}
+boxplot(group1)
+boxplot(group2)
+boxplot(group3)
+```
+
+#### diagramme circulaire de chaque groupe
+```{r partie 4.4.3}
+pie(table(group1$mlda))
+pie(table(group2$mlda))
+pie(table(group3$mlda))
+
+
+```
+
+#### Statistiques générales de chaque groupe
+```{r partie 4.4.4}
+summary(group1)
+summary(group2)
+summary(group3)
+```
 
 
