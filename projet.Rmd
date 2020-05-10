@@ -439,9 +439,14 @@ pie(table(group1$mlda))
 pie(table(group2$mlda))
 pie(table(group3$mlda))
 
-
 ```
 
+#### Hist de chaque groupe
+```{r partie 4.4.3.1}
+hist(table(group1$mlda))
+pie(table(group2$mlda))
+pie(table(group3$mlda))
+```
 #### Statistiques générales de chaque groupe
 ```{r partie 4.4.4}
 summary(group1)
@@ -449,4 +454,11 @@ summary(group2)
 summary(group3)
 ```
 
+#### 
+```{r partie 4.4.5}
+library(FactoMineR)
+group1.PCA = PCA(X = group1, ncp = 10)
+group2.PCA = PCA(X = group2, ncp = 10)
+group3.PCA = PCA(X = group3, ncp = 10)
+```
 
