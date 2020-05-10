@@ -9,7 +9,7 @@ output: html_document
 # Partie 1 : Analyse descriptive
 
 ## Question 1 
-#### Téléchargement du jeu de données et chargement sur R
+### Téléchargement du jeu de données et chargement sur R
 ```{r partie1.1}
 covid=read.csv("donnees_covid.csv", sep = ";")
 ```
@@ -28,42 +28,42 @@ covid=read.csv("donnees_covid.csv", sep = ";")
 #### - Hospitalise_total : indique le nombre de patients hospitalises
 #### - Gueris_jours : indique le nombre de guéris
 
-#### Calcul de la dimension
+### Calcul de la dimension
 ```{r partie1.2.1}
 dim(covid)
 ```
 
-#### Nom variables
+### Nom variables
 ```{r partie1.2.2}
 names(covid)
 ```
 
-#### Type variable 
+### Type variable 
 ```{r partie1.2.3}
 typeof(covid)
 ```
 
-#### Statistiques générales 
+### Statistiques générales 
 ```{r partie1.2.4}
 summary(covid)
 ```
 
-#### Calcul de l'écart type 
+### Calcul de l'écart type 
 ```{r partie1.2.5}
 apply (covid[,-1],2,sd)
 ```
 
-#### Diagramme en secteur
+### Diagramme en secteur
 ```{r partie1.2.10}
 pie(table(covid$duree_jours))
 ```
 
-#### Réalisation boite à moustache
+### Réalisation boite à moustache
 ```{r partie1.2.6}
 boxplot(covid[,-1])
 ```
 
-#### Réalisation histogrammes
+### Réalisation histogrammes
 ```{r partie1.2.7}
 hist(covid$duree_jours)
 hist(covid$latitude)
@@ -76,19 +76,19 @@ hist(covid$gueris_total)
 
 ## Question 3
 
-#### Affichage de la carte géographique 
+### Affichage de la carte géographique 
 ```{r partie1.3.1}
 #Loading stuff
 library(leaflet)
 ```
 
-#### Couleurs
+### Couleurs
 ```{r partie1.3.1.2}
 mybins = seq(min(covid$deces_total), max(covid$deces_total), by=2000)
 mypalette = colorBin( palette = "YlOrRd", domain=covid$deces_total, na.color="transparent", bins=mybins)
 ```
 
-#### Preparation du texte pour la info-bulle:
+### Preparation du texte pour la info-bulle:
 ```{r partie1.3.1.3}
 mytext = paste(
   "Deces totaux: ", covid$deces_total, "<br/>", 
@@ -98,7 +98,7 @@ mytext = paste(
   lapply(htmltools::HTML)
 ```
 
-#### Création de la carte
+### Création de la carte
 ```{r partie1.3.1.4}
 m = leaflet(covid) %>% 
   addTiles()  %>% 
@@ -119,12 +119,12 @@ m
 
 ## Question 1 
 
-#### Calcul de la corrélation entre les variables "reanimation_total" , "hospitalisation_total" , "gueris_total"
+### Calcul de la corrélation entre les variables "reanimation_total" , "hospitalisation_total" , "gueris_total"
 ```{r partie2.1.1}
 cor(covid[,-c(1:5)])
 ```
 
-#### Affichage matrice de corrélation
+### Affichage matrice de corrélation
 ```{r partie2.1.1.2}
 #install.packages("corrplot")
 M=cor(covid[,-c(1:5)])
@@ -134,7 +134,7 @@ corrplot(M, method="circle")
 
 ## Question 2
 
-#### Affichage nouages de points
+### Affichage nouages de points
 ```{r partie2.2}
 plot(covid[c(5:6)])
 plot(covid$deces_total,covid$hospitalises_total)
@@ -145,7 +145,7 @@ plot(covid$deces_total,covid$gueris_total)
 
 ## Question 3
 
-#### Division du jeu de données en deux sous-ensemble (80%-20%)
+### Division du jeu de données en deux sous-ensemble (80%-20%)
 ```{r partie2.3}
 sample = sample.int(n = nrow(covid), size = floor(.80*nrow(covid)))
 apprentissage = covid[sample, ]
@@ -157,7 +157,7 @@ test  = covid[-sample, ]
 
 ## Question 4
 
-#### Régression linéaire entre les variables explicatives et la variable à expliquer
+### Régression linéaire entre les variables explicatives et la variable à expliquer
 ```{r partie2.4}
 regLi = lm(deces_total~(reanimation_total + hospitalises_total + gueris_total), data = apprentissage)
 plot(regLi)
@@ -186,7 +186,7 @@ plot(regLi)
 
 ## Question 6
 
-#### Création de la fonction MAE (Min Absolute Error) et MSE (Min Squared Error)
+### Création de la fonction MAE (Min Absolute Error) et MSE (Min Squared Error)
 ```{r partie2.6}
 MAE = function(y_reel, y_est)
 {
@@ -203,7 +203,7 @@ MSE = function(y_reel, y_est)
 }
 ```
 
-#### Calcul du MAE et MSE graçe à les fonctions crées précédemment
+### Calcul du MAE et MSE graçe à les fonctions crées précédemment
 ```{r partie2.6.2}
 y_estime = predict(regLi)
 
@@ -245,13 +245,13 @@ barplot(covid.PCA$eig[,2])
 
 ## Question 2
 
-#### Création de la variable deces_total
+### Création de la variable deces_total
 ```{r partie3.2}
 library(ggplot2)
 covid$deces_total=as.factor(covid$deces_total)
 ```
 
-#### Création du graphique coloré
+### Création du graphique coloré
 ```{r partie3.2.2}
 sp = ggplot(covid, aes(x = latitude,y=longitude,color=deces_total)) + geom_point()
 sp
@@ -277,7 +277,7 @@ geom_point()
 
 #### On observe que le cluster se trouve entre 2 et 3. Donc on réalise deux k-means avec ces deux valeurs.
 
-#### K-means
+### K-means
 ```{r partie 3.3.2}
 km_covid = covid_values %>% 
 kmeans(centers = 2, nstart=20)
@@ -292,14 +292,14 @@ ggplot(covid_values, aes(x = deces_total, y = hospitalises_total, col = gueris_t
 geom_point(size = 2, alpha = 0.8, position = "jitter")
 ```
 
-#### CAH
+### CAH
 ```{r partie 3.3.3}
 z = covid[, -c(1,1)]
 
 z.numeric = transform(z, duree_jours = as.numeric(duree_jours), deces_total = as.numeric(deces_total), reanimation_total = as.numeric(reanimation_total), hospitalises_total = as.numeric(hospitalises_total), gueris_total = as.numeric(gueris_total)) 
 ```
 
-#### On a converti le data frame en double
+### On a converti le data frame en double
 ```{r partie 3.3.3.2}
 
 z.scale = scale(z.numeric)
@@ -329,25 +329,34 @@ plot(covid.moyen, labels = covid$maille_nom)
 #### Ainsi on en déduit de ces analyses que l'ensemble de la France est touchée par le covid 19. Le nombre de morts, de malades et de guéris vont augmenter avec le temps, même s'il est difficile de prédire ces données avec précision pour l'ensemble des départements français. Enfin, plusieurs départements français se retrouvent dans une situation similaire, mais Paris se distingue d'eux par son nombre plus important de personnes touchées par le virus. 
 
 
-# Bonus 
+# Bonus :
 
-#### Chargement du jeu de données Fatality
+### Chargement du jeu de données Fatality
 
 ```{r partie 4.1}
 fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
 ```
 
-#### Élimination de toutes les variables quantitatives du jeu de données fatality: 
+### Élimination de toutes les variables quantitatives du jeu de données fatality: 
 ```{r partie 4.2}
 fatalityStudy=fatality[,-c(1:2)]
 fatality= fatalityStudy[,-c(4:5)]
 rm(fatalityStudy)
 ```
 
-#### Subdivision du jeu de données en 3 sous groups
+### Subdivision du jeu de données en 3 sous groups
 ```{r partie 4.3}
 group1=fatality[c(1:122),]
 group2=fatality[c(123:245),]
 group3=fatality[-c(1:245),]
 ```
+### Présentation du jeu :
+#### Le jeu de données qu'on va analyser est un dataframe contenent 48 observations concernants le trafic autoroutier des États Unis. Il se compose de 6 variables dont :
+#### - mrall : représente le taux des accidents de la route
+#### - beertax : représente la taxe en cas d'accident du à l'alcol (en particulier la bierre)
+#### - mlda : représente l'age minimum pour boir
+#### - vmiles : représente la moyenne de miles par conducteur
+#### - unrate : représente le taux de chômage
+#### - pernic : représente le revenu par habitant
+
 
