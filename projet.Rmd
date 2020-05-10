@@ -120,6 +120,7 @@ m
 ```{r partie1.4.1}
 
 library(leaflet)
+library(leaflet.minicharts)
 library(dplyr)
 
 ```
@@ -411,7 +412,7 @@ group3=Fatality[-c(1:245),]
 ### Présentation du jeu :
 #### Le jeu de données qu'on va analyser est un dataframe contenent 48 observations concernants le trafic autoroutier des États Unis. Il se compose de 6 variables dont :
 #### - mrall : représente le taux des accidents de la route
-#### - beertax : représente la taxe en cas d'accident du à l'alcol (en particulier la bierre)
+#### - beertax : représente la taxe en cas d'accident du à l'alcool (en particulier la bière)
 #### - mlda : représente l'age minimum pour boir
 #### - vmiles : représente la moyenne de miles par conducteur
 #### - unrate : représente le taux de chômage
@@ -450,4 +451,138 @@ summary(group2)
 summary(group3)
 ```
 
+```{r partie CAH}
+
+distance1 = dist(group1, method = "euclidean")
+distance2 = dist(group2, method = "euclidean")
+distance3 = dist(group3, method = "euclidean")
+
+#CAH groupe 1
+group1.ward = hclust(distance1, method = "ward.D")
+group1.minimum = hclust(distance1, method = "single")
+group1.maximum = hclust(distance1, method = "complete")
+group1.moyen = hclust(distance1, method = "average")
+
+#CAH groupe 2
+group2.ward = hclust(distance2, method = "ward.D")
+group2.minimum = hclust(distance2, method = "single")
+group2.maximum = hclust(distance2, method = "complete")
+group2.moyen = hclust(distance2, method = "average")
+
+#CAH groupe 3
+group3.ward = hclust(distance3, method = "ward.D")
+group3.minimum = hclust(distance3, method = "single")
+group3.maximum = hclust(distance3, method = "complete")
+group3.moyen = hclust(distance3, method = "average")
+
+#Affichage des plots pour le groupe 1
+plot(group1.ward)
+plot(group1.minimum)
+plot(group1.maximum)
+plot(group1.moyen)
+
+#Affichage des plots pour le groupe 2
+plot(group2.ward)
+plot(group2.minimum)
+plot(group2.maximum)
+plot(group2.moyen)
+
+#Affichage des plots pour le groupe 3
+plot(group3.ward)
+plot(group3.minimum)
+plot(group3.maximum)
+plot(group3.moyen)
+
+```
+
+```{r partie K-means}
+
+#Groupe 1
+ratio_ss = data.frame(cluster = seq(from = 1, to = 5, by = 1)) 
+for (k in 1:5) {
+  km_group1 = kmeans(group1, k, nstart = 20)
+  ratio_ss$ratio[k] = km_group1$tot.withinss / km_group1$totss
+}
+
+ggplot(ratio_ss, aes(cluster, ratio)) + 
+geom_line() +
+geom_point()
+
+#Groupe 2
+ratio_ss = data.frame(cluster = seq(from = 1, to = 5, by = 1)) 
+for (k in 1:5) {
+  km_group2 = kmeans(group2, k, nstart = 20)
+  ratio_ss$ratio[k] = km_group2$tot.withinss / km_group2$totss
+}
+
+ggplot(ratio_ss, aes(cluster, ratio)) + 
+geom_line() +
+geom_point()
+
+#Groupe 3
+ratio_ss = data.frame(cluster = seq(from = 1, to = 5, by = 1)) 
+for (k in 1:5) {
+  km_group3 = kmeans(group3, k, nstart = 20)
+  ratio_ss$ratio[k] = km_group3$tot.withinss / km_group3$totss
+}
+
+ggplot(ratio_ss, aes(cluster, ratio)) + 
+geom_line() +
+geom_point()
+
+```
+
+#On remarque que le cluster se trouve entre 2 et 3
+
+```{r partie K-means 2}
+
+#Groupe 1
+
+#Avec 2 comme centre
+km_group1 = group1 %>% 
+kmeans(centers = 2, nstart=20)
+group1$cluster = km_group1$cluster
+ggplot(group1, aes(x = beertax, y = unrate, col = mrall)) + 
+geom_point(size = 2, alpha = 0.8, position = "jitter")
+
+#Avec 3 comme centre
+km_group1 = group1 %>% 
+kmeans(centers = 3, nstart=20)
+group1$cluster = km_group1$cluster
+ggplot(group1, aes(x = beertax, y = unrate, col = mrall)) + 
+geom_point(size = 2, alpha = 0.8, position = "jitter")
+
+#Groupe 2
+
+#Avec 2 comme centre
+km_group2 = group2 %>% 
+kmeans(centers = 2, nstart=20)
+group2$cluster = km_group2$cluster
+ggplot(group2, aes(x = beertax, y = unrate, col = mrall)) + 
+geom_point(size = 2, alpha = 0.8, position = "jitter")
+
+#Avec 3 comme centre
+km_group2 = group2 %>% 
+kmeans(centers = 3, nstart=20)
+group2$cluster = km_group2$cluster
+ggplot(group2, aes(x = beertax, y = unrate, col = mrall)) + 
+geom_point(size = 2, alpha = 0.8, position = "jitter")
+
+#Groupe 3
+
+#Avec 2 comme centre
+km_group3 = group3 %>% 
+kmeans(centers = 2, nstart=20)
+group3$cluster = km_group3$cluster
+ggplot(group3, aes(x = beertax, y = unrate, col = mrall)) + 
+geom_point(size = 2, alpha = 0.8, position = "jitter")
+
+#Avec 3 comme centre
+km_group3 = group3 %>% 
+kmeans(centers = 3, nstart=20)
+group3$cluster = km_group3$cluster
+ggplot(group3, aes(x = beertax, y = unrate, col = mrall)) + 
+geom_point(size = 2, alpha = 0.8, position = "jitter")
+
+```
 
