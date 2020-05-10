@@ -324,7 +324,7 @@ plot(covid.moyen, labels = covid$maille_nom)
 
 #### D'après l'analyse des résultats de la première partie on peut en déduire que toute la France métropolitaine a été touchée par l'épidémie. 
 #### D'après l'analyse de la deuxième partie, il est possible de prédire avec une bonne précision le nombre de morts pour chaque département en fonction des personnes en réanimation, hospitalisées et guéries, mais il est difficile de le prédire avec précision pour l'ensemble des départements.  
-### D'après l'analyse de la troisième partie, le nombre de malades, de morts et de guéris augmente avec le temps. De plus, le CAH montre qu'il y a des données similaires entre plusieurs départements dans le jeu de données, mais on remarque que Paris présente des données différentes par rapport à celles des autres pays. 
+#### D'après l'analyse de la troisième partie, le nombre de malades, de morts et de guéris augmente avec le temps. De plus, le CAH montre qu'il y a des données similaires entre plusieurs départements dans le jeu de données, mais on remarque que Paris présente des données différentes par rapport à celles des autres pays. 
 
 #### Ainsi on en déduit de ces analyses que l'ensemble de la France est touchée par le covid 19. Le nombre de morts, de malades et de guéris vont augmenter avec le temps, même s'il est difficile de prédire ces données avec précision pour l'ensemble des départements français. Enfin, plusieurs départements français se retrouvent dans une situation similaire, mais Paris se distingue d'eux par son nombre plus important de personnes touchées par le virus. 
 
@@ -343,4 +343,5 @@ fatalityStudy=fatality[,-c(1:2)]
 fatality= fatalityStudy[,-c(4:5)]
 rm(fatalityStudy)
 ```
+
 
