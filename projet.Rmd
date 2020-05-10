@@ -297,8 +297,10 @@ geom_point(size = 2, alpha = 0.8, position = "jitter")
 z = covid[, -c(1,1)]
 
 z.numeric = transform(z, duree_jours = as.numeric(duree_jours), deces_total = as.numeric(deces_total), reanimation_total = as.numeric(reanimation_total), hospitalises_total = as.numeric(hospitalises_total), gueris_total = as.numeric(gueris_total)) 
+```
 
-# On a converti le data frame en double
+#### On a converti le data frame en double
+```{r partie 3.3.3.2}
 
 z.scale = scale(z.numeric)
 
@@ -309,6 +311,7 @@ covid.minimum = hclust(distance, method = "single")
 covid.maximum = hclust(distance, method = "complete")
 covid.moyen = hclust(distance, method = "average")
 ```
+
 ## Question 4
 ```{r partie 3.3.4}
 plot(covid.ward, labels = covid$maille_nom)
@@ -332,8 +335,12 @@ plot(covid.moyen, labels = covid$maille_nom)
 
 ```{r partie 4.1}
 fatality=read.csv("Fatality.csv", sep = ",",row.names = "X")
-
 ```
 
-
+#### Élimination de toutes les variables quantitatives du jeu de données fatality: 
+```{r partie 4.2}
+fatalityStudy=fatality[,-c(1:2)]
+fatality= fatalityStudy[,-c(4:5)]
+rm(fatalityStudy)
+```
 
