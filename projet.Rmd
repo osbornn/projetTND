@@ -114,6 +114,64 @@ m = leaflet(covid) %>%
 m 
 ```
 
+## Question 4
+
+### Data
+```{r partie1.4.1}
+
+library(leaflet)
+library(dplyr)
+
+```
+
+### Création de la Map
+```{r partie1.4.2}
+
+tilesURL <- "http://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}"
+basemap = leaflet(width = "100%", height = "400px") %>%
+  addTiles(tilesURL)
+
+
+```
+
+### Répartition du nombre de personnes décédées, en réanimation, guéries et hospitalisées (diagramme circulaire)
+```{r partie1.4.3}
+
+colors <- c("#dc2f0a", "#dc8f0a", "#0ad7dc", "#0adc0f")
+
+basemap %>%
+  addMinicharts(
+    covid$longitude, covid$latitude,
+    type = "pie",
+    chartdata = covid[,-c(1,2,3,4)], 
+    colorPalette = colors, 
+    #width = sqrt(covid$deces_total), 
+    transitionTime = 0
+  )
+```
+### Répartition du nombre de personnes décédées, en réanimation, guéries et hospitalisées (histogrammes)
+```{r partie1.4.4}
+statscovid <- covid %>% select(deces_total, reanimation_total, hospitalises_total, gueris_total)
+basemap %>%
+  addMinicharts(
+    covid$longitude, covid$latitude,
+    chartdata = statscovid,
+    colorPalette = colors,
+    width = 45, height = 45
+  )
+
+```
+### Nombre de morts par départements (variable simple)
+
+```{r partie1.4.5}
+basemap %>%
+  addMinicharts(
+    covid$longitude, covid$latitude,
+    chartdata = covid$deces_total,
+    showLabels = TRUE,
+    width = 45
+  )
+```
 
 # Partie 2 : Prédiction du nombre de décès
 
